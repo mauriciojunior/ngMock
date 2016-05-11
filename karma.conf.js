@@ -1,6 +1,3 @@
-// Karma configuration
-// Generated on Wed Mar 23 2016 22:55:29 GMT-0300 (BRT)
-
 module.exports = function(config) {
   config.set({
 
@@ -16,7 +13,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'lib/angular/angular.min.js',
-      'lib/angular/angular.mocks.js',
+      'lib/angular/angular-mocks.js',
       'src/**/*.js',
       'spec/**/*.js'
     ],
