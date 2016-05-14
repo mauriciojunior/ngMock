@@ -9,6 +9,7 @@ describe('MovieCore', function () {
   }))
   afterEach(function () {
     $httpBackend.verifyNoOutstandingExpectation()
+    $httpBackend.verifyNoOutstandingRequest()
   })
 
   it('should create popular movie', function (done) {
@@ -56,15 +57,42 @@ describe('MovieCore', function () {
   })
 
   it('should authenticate requests', function (done) {
-    var expectedHeaders = { authToken: 'teddybear', Accept: 'application/json, text/plain, */*' }
+    var matchAny = /.*/
+    var populaMovie = { id: 'tt0076759', description: 'This movie is great!' }
+
+    function headerData (headers) {
+      return headers.authToken === 'teddybear'
+    }
+
     $httpBackend
-      .expectGET('popular/tt0076759', expectedHeaders)
+      .whenGET(matchAny, headerData)
       .respond(200)
+
+    $httpBackend
+      .expectPOST(matchAny, matchAny, headerData)
+      .respond(200)
+
+    $httpBackend
+      .expectPUT(matchAny, matchAny, headerData)
+      .respond(200)
+
+    $httpBackend
+      .expectDELETE(matchAny, headerData)
+      .respond(200)
+
+    PopularMovies
+      .query()
 
     PopularMovies
       .get({ movieId: 'tt0076759' })
 
-    $httpBackend.flush()
+    new PopularMovies(populaMovie).$save()
+    new PopularMovies(populaMovie).$update()
+    new PopularMovies(populaMovie).$remove()
+
+    $httpBackend.flush(1)
+    expect($httpBackend.flush).not.toThrow()
+
     done()
   })
 })
