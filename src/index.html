@@ -20,7 +20,7 @@
 			<div data-ng-controller="SearchController as vm">
 				<form class="form-inline-lg" data-ng-submit="vm.search()">
 					<div class="input-group">
-						<input type="text" placeholder="Film title..." data-ng-submit="vm.query" class="form-control">
+						<input type="text" placeholder="Film title..." data-ng-submit="vm.query" class="form-control" data-ng-keyup="vm.keyup()">
 						<span class="input-group-btn">
 							<button type="button" data-ng-click="vm.search()" class="btn btn-default">Go!</button>
 						</span>
