@@ -3,7 +3,7 @@
 
   angular
     .module('movieApp')
-    .directive('movieResult', function movieResult () {
+    .directive('movieResult', function () {
       return {
         restrict: 'E',
         replace: true,
@@ -19,7 +19,7 @@
           		'<h3>{{ result.Title }}</h3>',
 		          '<p><strong>Director:</strong> {{ result.Director }}</p>',
 		          '<p><strong>Actors:</strong> {{ result.Actors }}</p>',
-		          '<p><strong>Released:</strong> {{ result.Released }}</p>',
+		          '<p><strong>Released:</strong> {{ result.Released }} ({{ result.Released | fromNow }})</p>',
 		          '<p><strong>Genre:</strong> {{ result.Genre }}</p>',
           	'</div>',
           '</div>'

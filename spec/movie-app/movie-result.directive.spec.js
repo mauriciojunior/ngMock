@@ -16,7 +16,7 @@ describe('Movie Result Directive', function () {
 	    '<h3 class="ng-binding">Star Wars: Episode IV - A New Hope</h3>',
 	    '<p class="ng-binding"><strong>Director:</strong> George Lucas</p>',
 	    '<p class="ng-binding"><strong>Actors:</strong> Mark Hamill, Harrison Ford, Carrie Fisher, Peter Cushing</p>',
-	    '<p class="ng-binding"><strong>Released:</strong> 25 May 1977</p>',
+	    '<p class="ng-binding"><strong>Released:</strong> 25 May 1977 (39 years ago)</p>',
 	    '<p class="ng-binding"><strong>Genre:</strong> Action, Adventure, Fantasy</p>',
     '</div>'
   ].join('')
@@ -35,7 +35,8 @@ describe('Movie Result Directive', function () {
     element = $compile('<movie-result result="result"></movie-result>')($rootScope)
     $rootScope.$digest()
     expect(element.html()).toBe(expectedHTML)
-
+    expect($rootScope.$countChildScopes()).toBe(1)
+    expect($rootScope.$countWatchers()).toBe(9)
     done()
   })
 })

@@ -24,6 +24,7 @@
       omdbApi
         .find(id)
         .then(function (response) {
+          console.log(response)
           $scope.result = response
         })
     }
